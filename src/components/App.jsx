@@ -9,15 +9,12 @@ const App = () => {
       const response = await fetch(process.env.REACT_APP_BACKEND_URL);
       const data = await response.json();
       // console.log(data);
-
-      return data;
+      setPeople([
+        ...people,
+        ...data
+      ]);
     }
-
-    const data = fetchData();
-    setPeople([
-      ...people,
-      ...data
-    ]);
+    fetchData();
   }, []);
 
   return (
@@ -29,7 +26,7 @@ const App = () => {
         return (
           <div key={person.name}>
             <h4>{person.name}</h4>
-            <p>{person.age} years old, location: ${person.location}</p>
+            <p>{person.age} years old, location: {person.location}</p>
           </div>
         )
       }) : null }
